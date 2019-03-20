@@ -1,5 +1,4 @@
-FROM nvidia/cuda:8.0-devel
-
+FROM nvidia/cuda:9.0-base
 WORKDIR /tmp
 
 ADD build-ffmpeg.sh build-ffmpeg.sh
