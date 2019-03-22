@@ -10,6 +10,8 @@ RUN ./build-ffmpeg.sh
 
 ENV UNAME zukdoor
 
+RUN apt-get update && apt-get install sudo
+
 RUN export UNAME=$UNAME UID=1000 GID=1000 && \
     mkdir -p "/home/${UNAME}" && \
     echo "${UNAME}:x:${UID}:${GID}:${UNAME} User,,,:/home/${UNAME}:/bin/bash" >> /etc/passwd && \
