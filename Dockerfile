@@ -7,3 +7,19 @@ COPY build-ffmpeg.sh build-ffmpeg.sh
 RUN chmod +x build-ffmpeg.sh
 
 RUN ./build-ffmpeg.sh
+
+ENV UNAME zukdoor
+
+RUN export UNAME=$UNAME UID=1000 GID=1000 && \
+    mkdir -p "/home/${UNAME}" && \
+    echo "${UNAME}:x:${UID}:${GID}:${UNAME} User,,,:/home/${UNAME}:/bin/bash" >> /etc/passwd && \
+    echo "${UNAME}:x:${UID}:" >> /etc/group && \
+    mkdir -p /etc/sudoers.d && \
+    echo "${UNAME} ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/${UNAME} && \
+    chmod 0440 /etc/sudoers.d/${UNAME} && \
+    chown ${UID}:${GID} -R /home/${UNAME} && \
+    gpasswd -a ${UNAME} audio
+
+USER $UNAME
+ENV HOME /home/zukdoor
+WORKDIR $HOME
