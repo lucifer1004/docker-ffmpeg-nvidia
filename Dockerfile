@@ -10,7 +10,7 @@ RUN ./build-ffmpeg.sh
 
 ENV UNAME zukdoor
 
-RUN apt-get update && apt-get install sudo
+RUN apt-get update && apt-get install -y sudo
 
 RUN export UNAME=$UNAME UID=1000 GID=1000 && \
     mkdir -p "/home/${UNAME}" && \
