@@ -10,7 +10,7 @@ RUN ./build-ffmpeg.sh
 
 ENV UNAME zukdoor
 
-RUN apt-get update && apt-get install -y sudo
+RUN apt-get update && apt-get install -y sudo pulseaudio
 
 RUN export UNAME=$UNAME UID=1000 GID=1000 && \
     mkdir -p "/home/${UNAME}" && \
@@ -25,3 +25,8 @@ RUN export UNAME=$UNAME UID=1000 GID=1000 && \
 USER $UNAME
 ENV HOME /home/zukdoor
 WORKDIR $HOME
+COPY entrypoint.sh .
+COPY .asoundrc .
+COPY yahei.ttf /usr/share/fonts/TTF
+
+ENTRYPOINT [ "sh", "-c", "./entrypoint.sh" ]
