@@ -28,5 +28,6 @@ WORKDIR $HOME
 COPY entrypoint.sh .
 COPY .asoundrc .
 COPY yahei.ttf /usr/share/fonts/TTF
+RUN sudo chmod +x ./entrypoint.sh
 
 ENTRYPOINT [ "sh", "-c", "./entrypoint.sh" ]
